@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="q3_css.css">
+    <title>Web Form</title>
+</head>
+
+<body>
+    <div class="form-box">
+
+        <form id="myForm">
+            <div>
+                <h3>Personal Information</h3>
+                <h5>Name</h5>
+                <div class="container">
+                    <input type="text" id="firstname" placeholder="First Name">
+                    <input type="text" id="secondname" placeholder="Last Name">
+                </div>
+                <h5>Contact Information</h5>
+                <div class="container">
+                    <label>Email:</label>
+                    <input style="width: 40%;" type="email" id="email" placeholder="Email">
+                    <label> Phone Number:</label>
+                    <input style="width: 40%;" type="tel" id="number" placeholder="Phone">
+                </div>
+
+                <h5>Address Information</h5>
+                <div class="container">
+                    <label> Street: </label>
+                    <input type="number" id="street" placeholder="Street No.">
+                    <label>City:</label>
+                    <input type="text" id="city" placeholder="City">
+
+                </div>
+                <div class="container">
+                    <label>State:</label>
+                    <input type="text" id="state" placeholder="State">
+                    <label>ZIP Code:</label>
+                    <input type="number" id="zip" placeholder="ZIP">
+
+                </div>
+
+            </div>
+
+            <div>
+                <h3>Education</h3>
+                <div class="container">
+                    <label for="educationlevel">Highest Level of Education Attained:</label>
+                    <input type="text" id="educationlevel" name="educationLevel" placeholder="Education Level">
+                    <label for="school">Name of School/University:</label>
+                    <input type="text" id="school" name="school" placeholder="Institute Name">
+                </div>
+                <div class="container">
+                    <label for="major">Major/Area of Study:</label>
+                    <input type="text" id="major" name="major" placeholder="Major">
+                    <label for="graduationYear">Graduation Year:</label>
+                    <input type="number" id="graduationYear" name="graduationYear" placeholder="Year">
+                </div>
+            </div>
+            <div>
+                <h3>Employment History</h3>
+                <div class="container">
+                    <label for="jobTitle">Previous Job Titles:</label>
+                    <input type="text" id="jobTitle" name="jobTitle" placeholder="Job title">
+                    <label for="companyName">Company Names:</label>
+                    <input type="text" id="companyName" name="companyName" placeholder="Company name">
+                </div>
+                <div class="container">
+                    <label for="employmentDates">Employment Dates:</label>
+                    <input type="text" id="employmentDates" name="employmentDates" placeholder="Date">
+                </div>
+                <div class="container">
+                    <label for="jobResponsibilities">Job Responsibilities:</label>
+                    <textarea id="jobResponsibilities" name="jobResponsibilities" rows="4"
+                        placeholder="give description here..."></textarea>
+                </div>
+            </div>
+            <div>
+                <h3>Skills</h3>
+                <div class="container">
+                    <label for="relevantSkills">Relevant Skills:</label>
+                    <input type="text" id="relevantSkills" name="relevantSkills" placeholder="Skills">
+                    <label for="certifications">Certifications:</label>
+                    <input type="text" id="certifications" name="certifications" placeholder="Certifications">
+                </div>
+            </div>
+            <div>
+                <h3>Availability</h3>
+                <div class="container">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate">
+                    <label for="preferredSchedule">Preferred Work Schedule:</label>
+                    <input type="text" id="preferredSchedule" name="preferredSchedule">
+
+                </div>
+                <div class="container">
+                    <label for="relocate">Willingness to Relocate:</label>
+                    <select class="options" id="relocate" name="relocate">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <h3>References</h3>
+                <div class="container">
+                    <label for="referenceName">Reference Name:</label>
+                    <input type="text" id="referenceName" name="referenceName" placeholder="Reference name">
+                    <label for="referenceContact">Reference Contact Information:</label>
+                    <input type="text" id="referenceContact" name="referenceContact" placeholder="Reference Contact">
+                </div>
+                <div class="container">
+                    <label for="relationship">Relationship to Applicant:</label>
+                    <input type="text" id="relationship" name="relationship" placeholder="Relationship">
+                </div>
+            </div>
+            <div>
+                <h3>Additional Questions</h3>
+                <div class="container">
+                    <label for="whyWorkHere">Why do you want to work for this company?</label><br>
+                    <textarea id="whyWorkHere" name="whyWorkHere" rows="4"
+                        placeholder="Akhir yahan hei kyun?..."></textarea>
+                </div>
+            </div>
+            <div class="Consent">
+                <input type="checkbox" id="termsAgreement" name="termsAgreement">
+                <label for="termsAgreement">I agree to the terms and conditions</label><br>
+                <input type="checkbox" id="privacyPolicy" name="privacyPolicy">
+                <label for="privacyPolicy">I acknowledge the privacy policy</label>
+            </div>
+
+            <button id="submitbtn" type="submit">Submit</button>
+
+
+
+        </form>
+        <button id="table" type="button">Show Data in Table</button>
+        <div class="Table_Data"></div>
+
+
+    </div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function (event) {
+            // Prevent form submission
+            event.preventDefault();
+            // Call validateForm() function
+            formDataSubmitted = false;
+            validateForm();
+            formDataSubmitted = true;
+        });
+        document.getElementById("table").addEventListener("click", function (event) {
+            event.preventDefault();
+            if (formDataSubmitted) {
+                showTable();
+            } else {
+                alert("Please submit the form first.");
+            }
+        });
+
+        function showTable() {
+            let firstName = document.getElementById("firstname").value.trim();
+            let lastName = document.getElementById("secondname").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phoneNumber = document.getElementById("number").value.trim();
+            let street = document.getElementById("street").value.trim();
+            let city = document.getElementById("city").value.trim();
+            let state = document.getElementById("state").value.trim();
+            let zip = document.getElementById("zip").value.trim();
+            let EduLevel = document.getElementById("educationlevel").value.trim();
+            let InstitueName = document.getElementById("school").value.trim();
+            let Major = document.getElementById("major").value.trim();
+            let Year = document.getElementById("graduationYear").value.trim();
+            let jobTitleInput = document.getElementById('jobTitle').value.trim();
+            let companyNameInput = document.getElementById('companyName').value.trim();
+            let employmentDatesInput = document.getElementById('employmentDates').value.trim();
+            let jobResponsibilitiesTextarea = document.getElementById('jobResponsibilities').value.trim();
+            let relevantSkillsInput = document.getElementById('relevantSkills').value.trim();
+            let certificationsInput = document.getElementById('certifications').value.trim();
+            let startDateInput = document.getElementById('startDate').value.trim();
+            let preferredScheduleInput = document.getElementById('preferredSchedule').value.trim();
+            let relocateSelect = document.getElementById('relocate').value.trim();
+            let referenceNameInput = document.getElementById('referenceName').value.trim();
+            let referenceContactInput = document.getElementById('referenceContact').value.trim();
+            let relationshipInput = document.getElementById('relationship').value.trim();
+            let whyWorkHereTextarea = document.getElementById('whyWorkHere').value.trim();
+            console.log(firstName, lastName, email, phoneNumber);
+
+            let display = '<table id = "tab">';
+            display += '<tr><th>Field</th><th>Value</th></tr>';
+            display += '<tr><td>First Name</td><td>' + firstName + '</td></tr>';
+            display += '<tr><td>Last Name</td><td>' + lastName + '</td></tr>';
+            display += '<tr><td>Email</td><td>' + email + '</td></tr>';
+            display += '<tr><td>Phone Number</td><td>' + phoneNumber + '</td></tr>';
+            display += '<tr><td>Street</td><td>' + street + '</td></tr>';
+            display += '<tr><td>City</td><td>' + city + '</td></tr>';
+            display += '<tr><td>State</td><td>' + state + '</td></tr>';
+            display += '<tr><td>ZIP Code</td><td>' + zip + '</td></tr>';
+            display += '<tr><td>Education Level</td><td>' + EduLevel + '</td></tr>';
+            display += '<tr><td>Institute Name</td><td>' + InstitueName + '</td></tr>';
+            display += '<tr><td>Major</td><td>' + Major + '</td></tr>';
+            display += '<tr><td>Graduation Year</td><td>' + Year + '</td></tr>';
+            display += '<tr><td>Job Title</td><td>' + jobTitleInput + '</td></tr>';
+            display += '<tr><td>Company Name</td><td>' + companyNameInput + '</td></tr>';
+            display += '<tr><td>Employment Dates</td><td>' + employmentDatesInput + '</td></tr>';
+            display += '<tr><td>Job Responsibilities</td><td>' + jobResponsibilitiesTextarea + '</td></tr>';
+            display += '<tr><td>Relevant Skills</td><td>' + relevantSkillsInput + '</td></tr>';
+            display += '<tr><td>Certifications</td><td>' + certificationsInput + '</td></tr>';
+            display += '<tr><td>Start Date</td><td>' + startDateInput + '</td></tr>';
+            display += '<tr><td>Preferred Schedule</td><td>' + preferredScheduleInput + '</td></tr>';
+            display += '<tr><td>Willingness to Relocate</td><td>' + relocateSelect + '</td></tr>';
+            display += '<tr><td>Reference Name</td><td>' + referenceNameInput + '</td></tr>';
+            display += '<tr><td>Reference Contact</td><td>' + referenceContactInput + '</td></tr>';
+            display += '<tr><td>Relationship</td><td>' + relationshipInput + '</td></tr>';
+            display += '<tr><td>Why Work Here</td><td>' + whyWorkHereTextarea + '</td></tr>';
+            display += '</table>';
+            document.querySelector(".Table_Data").innerHTML = display;
+
+
+
+
+        }
+
+        function validateForm() {
+            console.log("hi");
+            let validForm = undefined;
+
+            let firstName = document.getElementById("firstname").value.trim();
+            let lastName = document.getElementById("secondname").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phoneNumber = document.getElementById("number").value.trim();
+            let street = document.getElementById("street").value.trim();
+            let city = document.getElementById("city").value.trim();
+            let state = document.getElementById("state").value.trim();
+            let zip = document.getElementById("zip").value.trim();
+            let EduLevel = document.getElementById("educationlevel").value.trim();
+            let InstitueName = document.getElementById("school").value.trim();
+            let Major = document.getElementById("major").value.trim();
+            let Year = document.getElementById("graduationYear").value.trim();
+            if (firstName === "") {
+                alert("Please enter your first name.");
+                validForm = false;
+            }
+
+            // Check if last name is empty
+            if (lastName === "") {
+                alert("Please enter your last name.");
+                validForm = false;
+            }
+            if (city === "") {
+                alert("Please enter your city.");
+                validForm = false;
+            }
+
+            // Check if last name is empty
+            if (state === "") {
+                alert("Please enter your state.");
+                validForm = false;
+            }
+
+
+            if (Major === "") {
+                alert("Please enter your Major.");
+                validForm = false;
+            }
+            if (InstitueName === "") {
+                alert("Please enter your Institue Name.");
+                validForm = false;
+            }
+            if (EduLevel === "") {
+                alert("Please enter your Education Level.(e.g BS,MS,PHD)");
+                validForm = false;
+            }
+
+            // Check if phone number is valid
+            if (!isNaN(phoneNumber) && !isNaN(parseFloat(phoneNumber))) {
+
+                if (phoneNumber.length !== 11) {
+                    validForm = false;
+                    alert("Please enter a valid phone number of 11 digits.");
+                }
+            } else {
+                validForm = false;
+                alert("Please enter a valid phone number.");
+            }
+
+            if (isNaN(street) && isNaN(parseFloat(street))) {
+                validForm = false;
+                alert("Please enter a valid street number.");
+
+            }
+
+            if (isNaN(zip) && isNaN(parseFloat(zip))) {
+                validForm = false;
+                alert("Please enter a valid zip code.");
+
+            }
+
+            if (isNaN(Year) && isNaN(parseFloat(Year))) {
+
+
+                if (Year.length !== 4) {
+                    validForm = false;
+                    alert("Please enter a valid year of graduation.");
+                }
+
+            }
+
+
+
+
+
+
+
+        }
+
+    </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
